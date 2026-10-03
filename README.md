@@ -84,3 +84,7 @@ mvn package
 ```
 
 The plugin jar ends up in `target/`. Every push is also built by GitHub Actions — the jar is attached to the workflow run.
+
+## License
+
+[MIT](LICENSE)

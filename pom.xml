@@ -13,6 +13,13 @@
     <description>Staff management for Minecraft servers: roles, shifts and player reports with Telegram notifications</description>
     <url>https://github.com/takemygunq/MineGranter</url>
 
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/licenses/MIT</url>
+        </license>
+    </licenses>
+
     <properties>
         <maven.compiler.release>17</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
