@@ -1,0 +1,40 @@
+name: MineGranter
+version: '${project.version}'
+main: com.takemygunq.minegranter.MineGranter
+api-version: '1.20'
+description: Staff roles, shifts and player reports with Telegram notifications
+authors: [ takemygunq ]
+website: https://github.com/takemygunq/MineGranter
+depend: [ LuckPerms ]
+softdepend: [ Essentials ]
+
+commands:
+  staff:
+    description: Give or take staff roles
+    usage: /staff <give|take|reload> ...
+  sw:
+    description: Start, stop or check a staff shift
+    usage: /sw <start|stop|check> ...
+  report:
+    description: Report a player
+    usage: /report <player> <reason>
+
+permissions:
+  minegranter.manage:
+    description: Give and take staff roles, reload the config
+    default: op
+  minegranter.shift:
+    description: Start and stop staff shifts
+    default: false
+  minegranter.shift.check:
+    description: Check another player's staff status
+    default: op
+  minegranter.report:
+    description: Report players
+    default: true
+  minegranter.report.immune:
+    description: Cannot be reported
+    default: op
+  minegranter.bypass:
+    description: Ignore on-shift restrictions
+    default: op

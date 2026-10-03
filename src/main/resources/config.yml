@@ -1,0 +1,102 @@
+# MineGranter configuration
+
+# Staff roles. Every role has two LuckPerms groups:
+#   on_group  — the working group with staff permissions (used while on shift)
+#   off_group — the group a staff member stays in while off shift
+# /staff give <player> <role> puts the player into off_group; /sw start switches to on_group.
+roles:
+  helper:
+    prefix: "HELPER"
+    on_group: "helper"
+    off_group: "offhelper"
+  sthelper:
+    prefix: "SR.HELPER"
+    on_group: "sthelper"
+    off_group: "offsthelper"
+  mlmoder:
+    prefix: "JR.MODERATOR"
+    on_group: "mlmoder"
+    off_group: "offmlmoder"
+  moder:
+    prefix: "MODERATOR"
+    on_group: "moder"
+    off_group: "offmoder"
+  stmoder:
+    prefix: "SR.MODERATOR"
+    on_group: "stmoder"
+    off_group: "offstmoder"
+
+# Console commands. Placeholders: {player}, {group}
+commands:
+  set_group: "lp user {player} parent set {group}"
+  remove_staff: "lp user {player} parent set default"
+
+shift:
+  # Run after a player starts a shift
+  on_start:
+    - "god {player} on"
+    - "fly {player} on"
+  # Run after a player ends a shift (also when they leave the server while on shift)
+  on_stop:
+    - "god {player} off"
+    - "fly {player} off"
+    - "spawn {player}"
+
+# What staff members can't do while on shift (minegranter.bypass ignores all of this)
+restrictions:
+  attack_players: true
+  pickup_items: true
+  open_containers: true
+  end_shift_on_quit: true
+
+reports:
+  cooldown: "2m"
+  min_reason_length: 3
+  # Server name shown in report notifications
+  server: "Survival"
+
+telegram:
+  enabled: false
+  # Bot token from @BotFather
+  bot_token: ""
+  # Chat for role and shift notifications (a group ID looks like -1001234567890)
+  staff_chat_id: ""
+  # Chat for player reports (can be the same chat)
+  reports_chat_id: ""
+  # Placeholders: {player}, {role}, {sender}, {reporter}, {target}, {reason}, {server}
+  messages:
+    role_given: "🧩 New staff member\nRole: {role}\nPlayer: {player}\nGiven by: {sender}"
+    role_taken: "❌ Staff role removed\nPlayer: {player}\nRemoved by: {sender}"
+    shift_started: "🟢 {player} ({role}) started a shift"
+    shift_stopped: "⚪ {player} ({role}) ended a shift"
+    report: "⚠ New player report\nReporter: {reporter}\nOffender: {target}\nReason: {reason}\nServer: {server}"
+
+messages:
+  prefix: "&d&lMINEGRANTER &7▸ &f"
+  no_permission: "You don't have permission!"
+  players_only: "This command can only be used by players!"
+  unknown_role: "Unknown role &7{role}&f. Available: &7{roles}"
+  usage_staff: "/staff give <player> <role> &7| &f/staff take <player> &7| &f/staff reload"
+  usage_sw: "/sw start &7| &f/sw stop &7| &f/sw check <player>"
+  usage_report: "/report <player> <reason>"
+  role_given: "{player} is now {role}&f!"
+  role_taken: "{player} is no longer staff."
+  announce_new_staff: "Congratulations, we have a new {role}&f! Welcome &7{player}"
+  reloaded: "Configuration reloaded."
+  not_staff: "You are not a staff member."
+  operator_shift: "Operators can't use shifts — staff permissions come from groups, not OP."
+  shift_started: "Your shift has started!"
+  shift_stopped: "Your shift has ended!"
+  already_on_shift: "You are already on shift!"
+  not_on_shift: "You are not on shift!"
+  check_on_shift: "&7{player}&f is on shift as {role}"
+  check_off_shift: "&7{player}&f is {role}&f, off shift"
+  check_not_staff: "&7{player}&f is not a staff member"
+  player_not_found: "Player &7{player}&f is not online"
+  invalid_nick: "That's not a valid Minecraft nickname"
+  report_self: "You can't report yourself!"
+  report_immune: "You can't report this player!"
+  report_short_reason: "Please give a longer reason!"
+  report_cooldown: "You can send your next report in &c{time}"
+  report_sent: "Your report on &c{target}&f has been sent. Reason: &a{reason}"
+  restricted: "You can't do that while on shift."
